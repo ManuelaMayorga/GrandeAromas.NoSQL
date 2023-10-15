@@ -19,9 +19,6 @@ public class UsuariosController {
     IUsuarioService usuarioService;
     @PostMapping("/guardarUsuario")
     public ResponseEntity<String> guardarUsuario(@RequestBody UsuariosModel usuario) {
-        if (usuario.getAffiliation_id() == -1) {
-            usuario.setAffiliation_id(-1);
-        }
         usuarioService.guardarUsuario(usuario);
         return new ResponseEntity<String>(usuarioService.guardarUsuario(usuario),HttpStatus.OK);
     }

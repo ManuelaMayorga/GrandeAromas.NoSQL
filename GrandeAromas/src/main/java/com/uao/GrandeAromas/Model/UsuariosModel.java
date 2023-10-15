@@ -21,7 +21,7 @@ public class UsuariosModel {
     private String email;
     private String password;
     private RolEnum rol;
-    private int Affiliation_id = -1;
+    private int Affiliation_id;
 
     
 
