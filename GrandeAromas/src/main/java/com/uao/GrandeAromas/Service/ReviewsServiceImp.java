@@ -15,7 +15,7 @@ public class ReviewsServiceImp implements IReviewsService{
     @Override
     public String guardarReview(ReviewsModel review) {
         reviewsRepository.save(review);
-        return "La review realizada por "+ review.getUserName() +" fue creada exitosamente";
+        return "La review realizada por "+ review.getNameUser() +" fue creada exitosamente";
     }
 
     @Override

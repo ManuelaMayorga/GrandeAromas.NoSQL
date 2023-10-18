@@ -20,7 +20,7 @@ public class ReviewsModel {
     @Id
     private int id;
     private int userId;
-    private String userName;
+    private String nameUser;
     private int product_id;
     private String comment;
     private int calification;
