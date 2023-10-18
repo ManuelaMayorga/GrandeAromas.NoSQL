@@ -1,8 +1,11 @@
 package com.uao.GrandeAromas.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,20 +17,24 @@ import com.uao.GrandeAromas.Service.IReviewsService;
 import com.uao.GrandeAromas.Service.IUsuarioService;
 
 @RestController
-@RequestMapping("/uao/GrandeAromas/reviews")
+@RequestMapping("/GrandeAromas/reviews")
 public class ReviewsController {
     @Autowired
     IReviewsService reviewsService;
+
     @Autowired
     IUsuarioService usuarioService;
-    @PostMapping("/")
-    public ResponseEntity<String> crearReview(@RequestBody ReviewsModel review){
-        UsuariosModel usuarioRef = usuarioService.encontrarIdyUsuarioNombre(review.getUser());
-        review.setUser(usuarioRef.getNameUser());
-        reviewsService.guardarReview(review);
-        return new ResponseEntity<String>(reviewsService.guardarReview(review),HttpStatus.OK);
 
+    @PostMapping("/crearReview")
+    public ResponseEntity<String> crearReview(@RequestBody ReviewsModel review) {
+        UsuariosModel usuario = usuarioService.encontrarIdyUsuarioNombre(review.getUserId());
+        review.setUserName(usuario.getNameUser());
+        reviewsService.guardarReview(review);
+        return new ResponseEntity<String>(reviewsService.guardarReview(review), HttpStatus.OK);
     }
 
-    
+    @GetMapping("/listarReviews")
+    public ResponseEntity<List<ReviewsModel>> listarReviews() {
+        return new ResponseEntity<List<ReviewsModel>>(reviewsService.listarReviews(), HttpStatus.OK);
+    }
 }

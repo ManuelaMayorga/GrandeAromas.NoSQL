@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -17,12 +19,10 @@ import lombok.NoArgsConstructor;
 public class ReviewsModel {
     @Id
     private int id;
-    private List<User> User;
+    private int userId;
+    private String userName;
     private int product_id;
     private String comment;
     private int calification;
     private Date date;
-    public static class User {
-        private String nameUser;
-        private int UserId;
-}}
+}
