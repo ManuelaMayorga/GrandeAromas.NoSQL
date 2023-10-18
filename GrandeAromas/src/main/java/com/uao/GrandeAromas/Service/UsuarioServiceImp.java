@@ -22,4 +22,11 @@ public class UsuarioServiceImp implements IUsuarioService {
     public List<UsuariosModel> obtenerUsuarios() {
         return usuarioRepository.findAll();
     }
-}
+    @Override
+    public UsuariosModel encontrarIdyUsuarioNombre(int userId) {
+        UsuariosModel usuarioEncontrado= new UsuariosModel();
+        UsuariosModel usuarioBD=usuarioRepository.encontrarIdyUsuarioNombre(userId);
+        usuarioEncontrado.setId(usuarioBD.getId());
+        usuarioEncontrado.setNameUser(usuarioBD.getNameUser());
+        return usuarioEncontrado;
+        }}

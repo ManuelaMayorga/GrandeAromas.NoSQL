@@ -8,4 +8,5 @@ public interface IUsuarioService {
     String guardarUsuario(UsuariosModel usuario);
 
     List<UsuariosModel> obtenerUsuarios();
+    UsuariosModel encontrarIdyUsuarioNombre(int userId);
 }
