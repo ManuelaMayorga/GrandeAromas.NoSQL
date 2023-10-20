@@ -28,7 +28,7 @@ public class ReviewsController {
     @PostMapping("/crearReview")
     public ResponseEntity<String> guardarReview(@RequestBody ReviewsModel review) {
         UsuariosModel usuario = usuarioService.encontrarIdyUsuarioNombre(review.getUserId());
-        review.setUserName(usuario.getNameUser());
+        review.setNameUser(usuario.getNameUser());
         reviewsService.guardarReview(review);
         return new ResponseEntity<String>(reviewsService.guardarReview(review), HttpStatus.OK);
     }
