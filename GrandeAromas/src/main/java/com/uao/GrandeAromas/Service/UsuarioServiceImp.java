@@ -1,6 +1,7 @@
 package com.uao.GrandeAromas.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,14 @@ public class UsuarioServiceImp implements IUsuarioService {
     }
 
     @Override
+    public String eliminarUsuarioPorId(int userId) {
+        if (usuarioRepository.existsById(userId)) {
+            usuarioRepository.deleteById(userId);
+        }
+        return "Usuario con id: " + userId + " eliminado";
+    }
+
+    @Override
     public List<UsuariosModel> obtenerUsuarios() {
         return usuarioRepository.findAll();
     }
@@ -29,4 +38,16 @@ public class UsuarioServiceImp implements IUsuarioService {
         usuarioEncontrado.setId(usuarioBD.getId());
         usuarioEncontrado.setNameUser(usuarioBD.getNameUser());
         return usuarioEncontrado;
-        }}
+        }
+
+    @Override
+    public Optional<UsuariosModel> obtenerUsuariosPorId(int userId) {
+        return usuarioRepository.findById(userId);
+    }
+
+    @Override
+    public String actualizarUsuario(UsuariosModel usuario) {
+        usuarioRepository.save(usuario);
+        return "El usuario con id: " + usuario.getId() + " ha sido actualizado";
+    }
+}
