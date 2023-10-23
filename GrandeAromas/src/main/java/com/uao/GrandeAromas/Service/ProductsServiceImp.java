@@ -17,7 +17,7 @@ public class ProductsServiceImp implements IProductsService {
     @Override
     public String agregarProducto(ProductsModel producto) {
         productsRepository.save(producto);
-        return "El producto" + producto.getProductName() + "fue creado exitosamente";
+        return "El producto " + producto.getProductName() + " fue creado exitosamente";
     }
 
     @Override

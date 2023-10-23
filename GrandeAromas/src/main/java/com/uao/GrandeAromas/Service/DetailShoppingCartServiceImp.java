@@ -31,6 +31,7 @@ public class DetailShoppingCartServiceImp implements IDetailShoppingCartService{
             if (detailShoppingCart.getQuantity() <= 0 || detailShoppingCart.getQuantity() > product.get().getQuantity()) {
                 return "La cantidad del producto no es válida o excede la disponibilidad";
             }
+
             return "El producto fue agregado exitosamente";
         }
     
