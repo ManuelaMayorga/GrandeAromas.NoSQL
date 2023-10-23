@@ -56,9 +56,18 @@ public class UsuariosController {
     else {
         throw new RecursoNoEncontradoException("No se puede actualizar el usuario con el id: " + userId + " porque no se enviaron todos los datos");
     }
-}
+    }
 
-
+    @GetMapping("/obtenerUsuario/{userId}")
+public ResponseEntity<?> obtenerUsuarioPorId(@PathVariable int userId) {
+    Optional<UsuariosModel> usuario = usuarioService.obtenerUsuariosPorId(userId);
+    if (usuario.isPresent()) {
+        return new ResponseEntity<Optional<UsuariosModel>>(usuario, HttpStatus.OK);
+    } else {
+        return new ResponseEntity<String>("El usuario con el ID " + userId + " no existe.", HttpStatus.NOT_FOUND);
+    }
+    }
+    
     @GetMapping("/obtenerUsuarios")
     public ResponseEntity<List<UsuariosModel>>obtenerUsuarios() {
         return new ResponseEntity<List<UsuariosModel>>(usuarioService.obtenerUsuarios(),HttpStatus.OK);

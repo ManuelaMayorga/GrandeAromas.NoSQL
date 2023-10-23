@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.uao.GrandeAromas.Model.ReviewsModel;
 import com.uao.GrandeAromas.Repository.IReviewsRepository;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ReviewsServiceImp implements IReviewsService{
+public class ReviewsServiceImp implements IReviewsService {
     @Autowired
     IReviewsRepository reviewsRepository;
 
@@ -22,6 +23,22 @@ public class ReviewsServiceImp implements IReviewsService{
     public List <ReviewsModel> listarReviews (){
         return reviewsRepository.findAll();
 
+    }
+
+    @Override
+    public String eliminarReviewPorId(int reviewId) {
+        reviewsRepository.deleteById(reviewId);
+        return "La review con id "+ reviewId +" fue eliminada exitosamente";
+    }
+
+    @Override
+    public String actualizarReview(ReviewsModel review) {
+        reviewsRepository.save(review);
+        return "La review con id "+ review.getId() +" fue actualizada exitosamente";
+    }
+    @Override
+    public Optional<ReviewsModel> obtenerReviewsPorId(int reviewId) {
+        return reviewsRepository.findById(reviewId);
     }
 
 }    
