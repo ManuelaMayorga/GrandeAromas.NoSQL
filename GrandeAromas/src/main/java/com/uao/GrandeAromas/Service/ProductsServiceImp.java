@@ -2,7 +2,6 @@ package com.uao.GrandeAromas.Service;
 
 import org.springframework.stereotype.Service;
 
-import com.uao.GrandeAromas.Model.DetailShoppingCartModel;
 import com.uao.GrandeAromas.Model.ProductsModel;
 import com.uao.GrandeAromas.Repository.IProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 import com.uao.GrandeAromas.Service.IShoppingCartService;
-import com.uao.GrandeAromas.Model.DetailShoppingCartModel;
-import com.uao.GrandeAromas.Model.ProductsModel;
 import com.uao.GrandeAromas.Model.ShoppingCartModel;
 
 @RestController
