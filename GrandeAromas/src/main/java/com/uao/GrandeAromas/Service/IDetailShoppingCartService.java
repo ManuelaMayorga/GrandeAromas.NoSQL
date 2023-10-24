@@ -11,6 +11,8 @@ public interface IDetailShoppingCartService {
 
     List<DetailShoppingCartModel> obtenerDetailShoppingCarts();
 
+    List<DetailShoppingCartModel> obtenerDetallesPorCarrito(int shoppingCartId);
+
     
 
 }

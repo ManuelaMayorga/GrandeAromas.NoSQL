@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 
 import com.uao.GrandeAromas.Service.IDetailShoppingCartService;
+import com.uao.GrandeAromas.Service.IProductsService;
+import com.uao.GrandeAromas.Service.IShoppingCartService;
 import com.uao.GrandeAromas.Model.DetailShoppingCartModel;
+import com.uao.GrandeAromas.Model.ProductsModel;
 
 
 @RestController
@@ -20,17 +23,40 @@ public class DetailShoppingCartController {
 
     @Autowired
     IDetailShoppingCartService detailShoppingCartService;
+    @Autowired
+    IProductsService productService; 
+    @Autowired
+    IShoppingCartService shoppingCartService;
 
     @PostMapping("/agregarProducto")
     public ResponseEntity<String> agregarProducto(@RequestBody DetailShoppingCartModel detailShoppingCart) {
+        
+
+        ProductsModel product = productService.obtenerProductoById(detailShoppingCart.getProductId()).orElse(null);
+        if (product != null) {
+            int quantityInCart = detailShoppingCart.getQuantity(); 
+            int currentQuantity = product.getQuantity();
+            if (currentQuantity >= quantityInCart) {
+               
+                product.setQuantity(currentQuantity - quantityInCart);
+                productService.actualizarProducto(product); 
+                detailShoppingCartService.agregarProducto(detailShoppingCart);
+
+
+            } else {
+                return new ResponseEntity<String>("No hay suficiente cantidad disponible", HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<String>("Producto no encontrado", HttpStatus.NOT_FOUND);
+        }
+
         detailShoppingCartService.agregarProducto(detailShoppingCart);
-        return new ResponseEntity<String>(detailShoppingCartService.agregarProducto(detailShoppingCart),HttpStatus.OK);
+        return new ResponseEntity<String>("Producto agregado al carrito", HttpStatus.OK);
     }
 
     @GetMapping("/listarDetailShoppingCarts")
     public ResponseEntity<List<DetailShoppingCartModel>> listarDetailShoppingCarts() {
-        return new ResponseEntity<List<DetailShoppingCartModel>>(detailShoppingCartService.obtenerDetailShoppingCarts(),HttpStatus.OK);
+        return new ResponseEntity<List<DetailShoppingCartModel>>(detailShoppingCartService.obtenerDetailShoppingCarts(), HttpStatus.OK);
     }
 
-    
 }

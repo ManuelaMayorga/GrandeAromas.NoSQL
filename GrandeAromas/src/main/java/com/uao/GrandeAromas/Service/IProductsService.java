@@ -11,4 +11,6 @@ public interface IProductsService {
 
     Optional<ProductsModel> obtenerProductoById(int productId);
 
+    void actualizarProducto(ProductsModel producto); 
+
 }

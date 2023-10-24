@@ -29,4 +29,10 @@ public class ProductsServiceImp implements IProductsService {
     public Optional<ProductsModel> obtenerProductoById(int productId) {
         return productsRepository.findById(productId);
     }
+
+    @Override
+    public void actualizarProducto(ProductsModel producto) {
+        productsRepository.save(producto);
+    }
+
 }
