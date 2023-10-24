@@ -15,6 +15,7 @@ import com.uao.GrandeAromas.Service.IProductsService;
 import com.uao.GrandeAromas.Service.IShoppingCartService;
 import com.uao.GrandeAromas.Model.DetailShoppingCartModel;
 import com.uao.GrandeAromas.Model.ProductsModel;
+import com.uao.GrandeAromas.Model.ShoppingCartModel;
 
 
 @RestController
@@ -36,23 +37,37 @@ public class DetailShoppingCartController {
         if (product != null) {
             int quantityInCart = detailShoppingCart.getQuantity(); 
             int currentQuantity = product.getQuantity();
+            double pricePerProduct = product.getPrice();
             if (currentQuantity >= quantityInCart) {
                
                 product.setQuantity(currentQuantity - quantityInCart);
                 productService.actualizarProducto(product); 
+
+                double totalPriceProducto = pricePerProduct * quantityInCart;
+
+                ShoppingCartModel shoppingCart = shoppingCartService.obtenerShoppingCartPorId(detailShoppingCart.getShoppingCartId()).orElse(null);
+
+                if (shoppingCart != null) {
+                    double currentTotalPrice = shoppingCart.getTotalPrice();
+                    shoppingCart.setTotalPrice(currentTotalPrice + totalPriceProducto);
+                    shoppingCartService.actualizarShoppingCart(shoppingCart);
+                } else {
+                    return new ResponseEntity<String>("Carrito de compras no encontrado", HttpStatus.NOT_FOUND);
+                }
                 detailShoppingCartService.agregarProducto(detailShoppingCart);
-
-
+                
             } else {
                 return new ResponseEntity<String>("No hay suficiente cantidad disponible", HttpStatus.BAD_REQUEST);
             }
         } else {
             return new ResponseEntity<String>("Producto no encontrado", HttpStatus.NOT_FOUND);
         }
+        
 
         detailShoppingCartService.agregarProducto(detailShoppingCart);
         return new ResponseEntity<String>("Producto agregado al carrito", HttpStatus.OK);
     }
+
 
     @GetMapping("/listarDetailShoppingCarts")
     public ResponseEntity<List<DetailShoppingCartModel>> listarDetailShoppingCarts() {

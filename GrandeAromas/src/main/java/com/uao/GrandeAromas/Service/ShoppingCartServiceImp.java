@@ -3,7 +3,7 @@ package com.uao.GrandeAromas.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
+import java.util.Optional;
 
 import com.uao.GrandeAromas.Repository.IShoppingCartRepository;
 import com.uao.GrandeAromas.Model.ShoppingCartModel;
@@ -25,8 +25,17 @@ public class ShoppingCartServiceImp implements IShoppingCartService{
         return shoppingCartRepository.findAll();
     }
 
+    @Override
 
+    public Optional<ShoppingCartModel> obtenerShoppingCartPorId(int id) {
+        return shoppingCartRepository.findById(id);
+    }
     
+    @Override
+
+    public void actualizarShoppingCart(ShoppingCartModel shoppingCart) {
+        shoppingCartRepository.save(shoppingCart);
+    }
 
     
 }

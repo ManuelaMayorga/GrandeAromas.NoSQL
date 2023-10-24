@@ -19,7 +19,7 @@ import java.util.List;
 @Document("ShoppingCart")
 public class ShoppingCartModel {
     @Id
-    private String id;
+    private int id;
     private int userId;
     private List<AddressInfo> addressInfo;
     private Date date;
