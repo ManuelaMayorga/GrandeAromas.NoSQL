@@ -35,7 +35,7 @@ public class DetailShoppingCartServiceImp implements IDetailShoppingCartService 
         // Agrega la lógica para agregar el producto al carrito aquí.
         // Detalles como guardar en el repositorio detailShoppingCartRepository y otros
         // dependen de tu implementación y flujo de trabajo específico.
-
+        detailShoppingCartRepository.save(detailShoppingCart);
         return "El producto fue agregado exitosamente";
     }
 
