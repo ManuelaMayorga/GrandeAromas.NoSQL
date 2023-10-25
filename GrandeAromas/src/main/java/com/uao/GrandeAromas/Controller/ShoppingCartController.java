@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +25,6 @@ public class ShoppingCartController {
 
     @PostMapping("/guardarShoppingCart")
     public ResponseEntity<String> guardarShoppingCart(@RequestBody ShoppingCartModel shoppingCart) {;
-        //Agregar la fecha del sistema
         Date fechaActual = new Date();
         shoppingCart.setDate(fechaActual);
         shoppingCart.setOrderStatus(OrderStatusEnum.En_Proceso);
