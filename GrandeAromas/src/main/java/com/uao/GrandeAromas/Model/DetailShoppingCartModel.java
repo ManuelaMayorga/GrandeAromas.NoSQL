@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Document("DetailShoppingCart")
 public class DetailShoppingCartModel {
     @Id
-    private int id;
+    private String id;
     private int shoppingCartId;
     private int productId;
     private int quantity;

@@ -33,8 +33,9 @@ public class ShoppingCartServiceImp implements IShoppingCartService{
     
     @Override
 
-    public void actualizarShoppingCart(ShoppingCartModel shoppingCart) {
+    public String actualizarShoppingCartPorId(ShoppingCartModel shoppingCart) {
         shoppingCartRepository.save(shoppingCart);
+        return "El carrito de compras con id se actualizo correctamente";
     }
 
     

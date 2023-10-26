@@ -13,6 +13,6 @@ public interface IShoppingCartService {
 
     Optional<ShoppingCartModel> obtenerShoppingCartPorId (int id);
 
-    void actualizarShoppingCart(ShoppingCartModel shoppingCart);
+    String actualizarShoppingCartPorId(ShoppingCartModel shoppingCart);
     
 }
