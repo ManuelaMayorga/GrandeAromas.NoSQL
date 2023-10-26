@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Date;
 import java.util.List;
 
 import com.uao.GrandeAromas.Service.IShoppingCartService;
+import com.uao.GrandeAromas.Enums.OrderStatusEnum;
 import com.uao.GrandeAromas.Model.ShoppingCartModel;
 
 @RestController
@@ -21,8 +24,14 @@ public class ShoppingCartController {
     IShoppingCartService shoppingCartService;
 
     @PostMapping("/guardarShoppingCart")
-    public ResponseEntity<String> guardarShoppingCart(@RequestBody ShoppingCartModel shoppingCart) {
+    public ResponseEntity<String> guardarShoppingCart(@RequestBody ShoppingCartModel shoppingCart) {;
+        Date fechaActual = new Date();
+        shoppingCart.setDate(fechaActual);
+        shoppingCart.setOrderStatus(OrderStatusEnum.En_Proceso);
+        //Garantizar que existan productos y cantidades del detalle de la venta, si existen 
         shoppingCartService.guardarShoppingCart(shoppingCart);
+        // De shoppingCart recuperar cada detalle de compra 
+        // Si no existen productos o cantidades del detalle de la venta, retornar un error
         return new ResponseEntity<String>(shoppingCartService.guardarShoppingCart(shoppingCart),HttpStatus.OK);
     }
 

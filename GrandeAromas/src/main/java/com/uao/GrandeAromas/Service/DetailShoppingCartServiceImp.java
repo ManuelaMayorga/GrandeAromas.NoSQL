@@ -2,9 +2,11 @@ package com.uao.GrandeAromas.Service;
 
 import com.uao.GrandeAromas.Model.DetailShoppingCartModel;
 import com.uao.GrandeAromas.Model.ProductsModel;
+import com.uao.GrandeAromas.Model.ShoppingCartModel;
 
 import java.util.List;
 import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,16 @@ public class DetailShoppingCartServiceImp implements IDetailShoppingCartService 
     @Autowired
     IProductsService productsService;
 
+    @Autowired
+
+    IShoppingCartService shoppingCartService;
     @Override
     public String agregarProducto(DetailShoppingCartModel detailShoppingCart) {
         Optional<ProductsModel> product = productsService.obtenerProductoPorId(detailShoppingCart.getProductId());
 
+        Optional<ShoppingCartModel> shoppingCart = shoppingCartService.obtenerShoppingCartPorId(detailShoppingCart.getShoppingCartId());
+        
+        
         if (product.isEmpty()) {
             return "El producto no existe";
         }
@@ -32,9 +40,10 @@ public class DetailShoppingCartServiceImp implements IDetailShoppingCartService 
             return "La cantidad del producto no es válida o excede la disponibilidad";
         }
 
-        // Agrega la lógica para agregar el producto al carrito aquí.
-        // Detalles como guardar en el repositorio detailShoppingCartRepository y otros
-        // dependen de tu implementación y flujo de trabajo específico.
+
+        if (shoppingCart.isEmpty()) {
+            return "El carrito de compras no existe";
+        }
         detailShoppingCartRepository.save(detailShoppingCart);
         return "El producto fue agregado exitosamente";
     }
