@@ -22,7 +22,7 @@ public class DetailShoppingCartServiceImp implements IDetailShoppingCartService 
 
     @Override
     public String agregarProducto(DetailShoppingCartModel detailShoppingCart) {
-        Optional<ProductsModel> product = productsService.obtenerProductoById(detailShoppingCart.getProductId());
+        Optional<ProductsModel> product = productsService.obtenerProductoPorId(detailShoppingCart.getProductId());
 
         if (product.isEmpty()) {
             return "El producto no existe";

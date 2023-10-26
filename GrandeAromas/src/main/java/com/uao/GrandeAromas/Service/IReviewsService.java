@@ -11,7 +11,7 @@ public interface IReviewsService {
     
     List<ReviewsModel> listarReviews();
     
-    String actualizarReview(ReviewsModel Reviews);
+    String actualizarReviewPorId(ReviewsModel Reviews);
 
     String eliminarReviewPorId(int reviewId);
 

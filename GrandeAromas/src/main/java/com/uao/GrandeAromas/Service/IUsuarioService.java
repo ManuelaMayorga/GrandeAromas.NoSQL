@@ -12,7 +12,7 @@ public interface IUsuarioService {
 
     String eliminarUsuarioPorId(int userId);
 
-    String actualizarUsuario(UsuariosModel usuario);
+    String actualizarUsuarioPorId(UsuariosModel usuario);
     
     UsuariosModel encontrarIdyUsuarioNombre(int userId);
 

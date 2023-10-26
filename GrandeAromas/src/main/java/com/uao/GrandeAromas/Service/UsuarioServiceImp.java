@@ -46,7 +46,7 @@ public class UsuarioServiceImp implements IUsuarioService {
     }
 
     @Override
-    public String actualizarUsuario(UsuariosModel usuario) {
+    public String actualizarUsuarioPorId(UsuariosModel usuario) {
         usuarioRepository.save(usuario);
         return "El usuario con id: " + usuario.getId() + " ha sido actualizado";
     }

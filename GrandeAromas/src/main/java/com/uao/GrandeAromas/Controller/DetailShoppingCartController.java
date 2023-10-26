@@ -32,14 +32,14 @@ public class DetailShoppingCartController {
     public ResponseEntity<String> agregarProducto(@RequestBody DetailShoppingCartModel detailShoppingCart) {
         
 
-        ProductsModel product = productService.obtenerProductoById(detailShoppingCart.getProductId()).orElse(null);
+        ProductsModel product = productService.obtenerProductoPorId(detailShoppingCart.getProductId()).orElse(null);
         if (product != null) {
             int quantityInCart = detailShoppingCart.getQuantity(); 
             int currentQuantity = product.getQuantity();
             if (currentQuantity >= quantityInCart) {
                
                 product.setQuantity(currentQuantity - quantityInCart);
-                productService.actualizarProducto(product); 
+                productService.actualizarProductoPorId(product); 
                 detailShoppingCartService.agregarProducto(detailShoppingCart);
 
 

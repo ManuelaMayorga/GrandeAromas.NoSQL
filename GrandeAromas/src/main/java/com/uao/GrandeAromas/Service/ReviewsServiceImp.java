@@ -32,7 +32,7 @@ public class ReviewsServiceImp implements IReviewsService {
     }
 
     @Override
-    public String actualizarReview(ReviewsModel review) {
+    public String actualizarReviewPorId(ReviewsModel review) {
         reviewsRepository.save(review);
         return "La review con id "+ review.getId() +" fue actualizada exitosamente";
     }

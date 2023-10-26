@@ -1,7 +1,6 @@
 package com.uao.GrandeAromas.Service;
 
 import org.springframework.stereotype.Service;
-
 import com.uao.GrandeAromas.Model.ProductsModel;
 import com.uao.GrandeAromas.Repository.IProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class ProductsServiceImp implements IProductsService {
     @Override
     public String agregarProducto(ProductsModel producto) {
         productsRepository.save(producto);
-        return "El producto " + producto.getProductName() + " fue creado exitosamente";
+        return "El producto" + producto.getProductName() + "fue creado exitosamente";
     }
 
     @Override
@@ -25,14 +24,20 @@ public class ProductsServiceImp implements IProductsService {
         return productsRepository.findAll();
     }
 
-    @Override 
-    public Optional<ProductsModel> obtenerProductoById(int productId) {
+    @Override
+    public Optional<ProductsModel> obtenerProductoPorId(int productId) {
         return productsRepository.findById(productId);
     }
 
     @Override
-    public void actualizarProducto(ProductsModel producto) {
-        productsRepository.save(producto);
+    public String actualizarProductoPorId(ProductsModel product) {
+        productsRepository.save(product);
+        return "El producto " + product.getProductName() + " fue actualizado exitosamente";
     }
 
+    @Override
+    public String eliminarProductoPorId(int productId) {
+        productsRepository.deleteById(productId);
+        return "El producto con el id: " + productId + " fue eliminado exitosamente";
+    }
 }

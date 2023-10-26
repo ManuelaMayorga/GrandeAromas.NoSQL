@@ -3,6 +3,7 @@ package com.uao.GrandeAromas.Controller;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,36 +55,40 @@ public class ReviewsController {
         return new ResponseEntity<String>(reviewsService.eliminarReviewPorId(reviewId), HttpStatus.OK);
     }
     
-    @PutMapping("/actualizar/{reviewId}")
+    @PutMapping("/actualizarReview/{reviewId}")
     public ResponseEntity<String> actualizarReviewPorId(@PathVariable int reviewId, @RequestBody ReviewsModel reviewDetail) {
     ReviewsModel review = reviewsService.obtenerReviewsPorId(reviewId).orElseThrow(() -> new RecursoNoEncontradoException("Review no encontrada con el id: " + reviewId));
+    
+    review.setComment(reviewDetail.getComment());
+    review.setCalification(reviewDetail.getCalification());
 
+    if (reviewDetail.getComment().isEmpty() || reviewDetail.getCalification() < 1 || reviewDetail.getCalification() > 5) {
+        if (reviewDetail.getComment().isEmpty()) {
+            return new ResponseEntity<String>("El campo de comentario no puede estar vacío, no se ha actualizado la review", HttpStatus.BAD_REQUEST);
+        }
+        if (reviewDetail.getCalification() < 1 || reviewDetail.getCalification() > 5) {
+            return new ResponseEntity<String>("La calificación debe estar entre 1 y 5, no se ha actualizado la review", HttpStatus.BAD_REQUEST);
+        }
+    } else {
         review.setComment(reviewDetail.getComment());
         review.setCalification(reviewDetail.getCalification());
-
-        if (!reviewDetail.getComment().isEmpty() || reviewDetail.getCalification() != 0) {
-            reviewsService.actualizarReview(review);
-            return new ResponseEntity<String>(reviewsService.actualizarReview(review),HttpStatus.OK);
-        } 
-
-        else if (reviewDetail.getCalification() <0 || reviewDetail.getCalification() >5) {
-            return new ResponseEntity<String>("La calificación debe estar entre 0 y 5", HttpStatus.BAD_REQUEST);
-        }
-
-        else {
-            throw new RecursoNoEncontradoException("No se puede actualizar la review con el id: " + reviewId + " porque no se enviaron todos los datos");
-        }
+        reviewsService.actualizarReviewPorId(review);
+        return new ResponseEntity<String>("Review con el id: " + reviewId + " actualizada con éxito", HttpStatus.OK);
     }
-    
+
+    throw new RecursoNoEncontradoException("No se puede actualizar la review con el id: " + reviewId + " debido a datos inválidos");
+}
+
+
     @GetMapping("/buscarReview/{reviewId}")
     public ResponseEntity<?> obtenerReviewsPorId(@PathVariable int reviewId) {
-        Optional<ReviewsModel> optionalReview = reviewsService.obtenerReviewsPorId(reviewId);
+        Optional<ReviewsModel> review = reviewsService.obtenerReviewsPorId(reviewId);
 
-        if (!optionalReview.isPresent()) {
+        if (!review.isPresent()) {
             return new ResponseEntity<>("Revisión no encontrada para el ID: " + reviewId, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(optionalReview.get(), HttpStatus.OK);
+        return new ResponseEntity<>(review.get(), HttpStatus.OK);
     }
 
     
