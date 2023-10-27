@@ -47,25 +47,28 @@ public class ShoppingCartController {
         shoppingCart.setTotalPrice(shoppingCartDTO.getTotalPrice());
         shoppingCart.setDate(fechaActual);
         shoppingCart.setOrderStatus(OrderStatusEnum.En_Proceso);
-        //Garantizar que existan productos y cantidades del detalle de la venta, si existen
         
+        //Recuperar los productId y la quantity de cada elemento de la lista 
         List<Map<String, Integer>> detalleVenta = shoppingCartDTO.getDetalleVenta();
         ProductsModel producto = new ProductsModel();
         int productId = 0;
         int quantity = 0;
+        //Recorre cada elemento del array 
         for (int i = 0 ; i < detalleVenta.size() ; i++) {
             productId = detalleVenta.get(i).get("productId");
             producto = this.productsService.obtenerProductoPorId(productId).orElseThrow(()-> new RecursoNoEncontradoException("El producto no existe") );
             quantity = detalleVenta.get(i).get("quantity");
 
+            //Valida que exista el producto y suficiente cantidad 
             if (producto != null && quantity <= producto.getQuantity()) {
-                
                 int currentQuantity = producto.getQuantity();
                 double pricePerProduct = producto.getPrice();
 
+                // Restar la cantidad solicitada al producto
                 producto.setQuantity(currentQuantity - quantity);
                 productsService.actualizarProductoPorId(producto);
 
+                //Calcular el precio total
                 double totalPriceProducto = pricePerProduct * quantity;
 
                 double currentTotalPrice = shoppingCartDTO.getTotalPrice();
@@ -73,6 +76,7 @@ public class ShoppingCartController {
                 shoppingCart.setTotalPrice(shoppingCartDTO.getTotalPrice());
                 shoppingCartService.actualizarShoppingCartPorId(shoppingCart);
                 
+                //Agregar a DetailShoppingCart los campos
                 DetailShoppingCartModel detailShoppingCart = new DetailShoppingCartModel();
                 
                 detailShoppingCart.setShoppingCartId(shoppingCartDTO.getId());
