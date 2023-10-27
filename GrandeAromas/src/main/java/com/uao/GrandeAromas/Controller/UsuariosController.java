@@ -41,7 +41,7 @@ public class UsuariosController {
     return new ResponseEntity<String>(usuarioService.eliminarUsuarioPorId(userId), HttpStatus.OK);
     }
 
-    @PutMapping("/actualizarUsuario/{userId}")
+    @PutMapping("/actualizar/{userId}")
     public ResponseEntity<String> actualizarUsuarioPorId(@PathVariable int userId, @RequestBody UsuariosModel userDetail) {
     UsuariosModel usuario = usuarioService.obtenerUsuariosPorId(userId).orElseThrow(() -> new RecursoNoEncontradoException("Usuario no encontrado con el id: " + userId));
 
@@ -50,8 +50,8 @@ public class UsuariosController {
     usuario.setPassword(userDetail.getPassword());
 
     if (!userDetail.getNameUser().isEmpty() && !userDetail.getEmail().isEmpty() && !userDetail.getPassword().isEmpty()) {
-        usuarioService.actualizarUsuarioPorId(usuario);
-        return new ResponseEntity<String>(usuarioService.actualizarUsuarioPorId(usuario),HttpStatus.OK);
+        usuarioService.actualizarUsuario(usuario);
+        return new ResponseEntity<String>(usuarioService.actualizarUsuario(usuario),HttpStatus.OK);
     } 
     else {
         throw new RecursoNoEncontradoException("No se puede actualizar el usuario con el id: " + userId + " porque no se enviaron todos los datos");
@@ -59,7 +59,7 @@ public class UsuariosController {
     }
 
     @GetMapping("/obtenerUsuario/{userId}")
-    public ResponseEntity<?> obtenerUsuariosPorId(@PathVariable int userId) {
+public ResponseEntity<?> obtenerUsuarioPorId(@PathVariable int userId) {
     Optional<UsuariosModel> usuario = usuarioService.obtenerUsuariosPorId(userId);
     if (usuario.isPresent()) {
         return new ResponseEntity<Optional<UsuariosModel>>(usuario, HttpStatus.OK);
