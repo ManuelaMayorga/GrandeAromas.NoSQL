@@ -102,6 +102,7 @@ public class ShoppingCartController {
             detailShoppingCart.setQuantity(quantity);
     
             detailShoppingCartService.agregarProducto(detailShoppingCart);
+            shoppingCart.setOrderStatus(OrderStatusEnum.Pagada);
         }
     
         return new ResponseEntity<String>(shoppingCartService.guardarShoppingCart(shoppingCart), HttpStatus.OK);
