@@ -1,5 +1,6 @@
 package com.uao.GrandeAromas.Controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,17 +13,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.uao.GrandeAromas.Service.IDetailShoppingCartService;
 import com.uao.GrandeAromas.Service.IProductsService;
 import com.uao.GrandeAromas.Service.IShoppingCartService;
-
+import com.uao.GrandeAromas.Service.IUsuarioService;
 import com.uao.GrandeAromas.Domain.ShoppingCartDTO;
 import com.uao.GrandeAromas.Enums.OrderStatusEnum;
-import com.uao.GrandeAromas.Exceptions.RecursoNoEncontradoException;
 import com.uao.GrandeAromas.Model.DetailShoppingCartModel;
 import com.uao.GrandeAromas.Model.ProductsModel;
 import com.uao.GrandeAromas.Model.ShoppingCartModel;
+import com.uao.GrandeAromas.Model.UsuariosModel;
 
 @RestController
 @RequestMapping("/GrandeAromas/shoppingCart")
@@ -37,57 +39,72 @@ public class ShoppingCartController {
     @Autowired
     IDetailShoppingCartService detailShoppingCartService;
 
+    @Autowired
+    IUsuarioService usuarioService;
     @PostMapping("/guardarShoppingCart")
-    public ResponseEntity<String> guardarShoppingCart( @RequestBody ShoppingCartDTO shoppingCartDTO) {
+    public ResponseEntity<String> guardarShoppingCart(@RequestBody ShoppingCartDTO shoppingCartDTO) {
         ShoppingCartModel shoppingCart = new ShoppingCartModel();
         Date fechaActual = new Date();
         shoppingCart.setId(shoppingCartDTO.getId());
+    
+        Optional<UsuariosModel> user = this.usuarioService.obtenerUsuariosPorId(shoppingCartDTO.getUserId());
+        if (!user.isPresent()) {
+            return new ResponseEntity<String>("El usuario con id " + shoppingCartDTO.getUserId() + " no existe.", HttpStatus.BAD_REQUEST);
+        }
+    
         shoppingCart.setUserId(shoppingCartDTO.getUserId());
         shoppingCart.setAddressInfo(shoppingCartDTO.getAddressInfo());
         shoppingCart.setTotalPrice(shoppingCartDTO.getTotalPrice());
         shoppingCart.setDate(fechaActual);
         shoppingCart.setOrderStatus(OrderStatusEnum.En_Proceso);
-        
-        //Recuperar los productId y la quantity de cada elemento de la lista 
+    
         List<Map<String, Integer>> detalleVenta = shoppingCartDTO.getDetalleVenta();
-        ProductsModel producto = new ProductsModel();
-        int productId = 0;
-        int quantity = 0;
-        //Recorre cada elemento del array 
-        for (int i = 0 ; i < detalleVenta.size() ; i++) {
-            productId = detalleVenta.get(i).get("productId");
-            producto = this.productsService.obtenerProductoPorId(productId).orElseThrow(()-> new RecursoNoEncontradoException("El producto no existe") );
-            quantity = detalleVenta.get(i).get("quantity");
-
-            //Valida que exista el producto y suficiente cantidad 
-            if (producto != null && quantity <= producto.getQuantity()) {
-                int currentQuantity = producto.getQuantity();
-                double pricePerProduct = producto.getPrice();
-
-                // Restar la cantidad solicitada al producto
-                producto.setQuantity(currentQuantity - quantity);
-                productsService.actualizarProductoPorId(producto);
-
-                //Calcular el precio total
-                double totalPriceProducto = pricePerProduct * quantity;
-
-                double currentTotalPrice = shoppingCartDTO.getTotalPrice();
-                shoppingCartDTO.setTotalPrice(currentTotalPrice + totalPriceProducto);
-                shoppingCart.setTotalPrice(shoppingCartDTO.getTotalPrice());
-                shoppingCartService.actualizarShoppingCartPorId(shoppingCart);
-                
-                //Agregar a DetailShoppingCart los campos
-                DetailShoppingCartModel detailShoppingCart = new DetailShoppingCartModel();
-                
-                detailShoppingCart.setShoppingCartId(shoppingCartDTO.getId());
-                detailShoppingCart.setProductId(productId);
-                detailShoppingCart.setQuantity(quantity);
-                
-                detailShoppingCartService.agregarProducto(detailShoppingCart);
-
+        boolean allProductsValid = true; // Variable para rastrear si todos los productos son válidos
+    
+        for (Map<String, Integer> item : detalleVenta) {
+            int productId = item.get("productId");
+            int quantity = item.get("quantity");
+    
+            ProductsModel producto = this.productsService.obtenerProductoPorId(productId).orElse(null);
+    
+            if (producto == null || quantity < 1 || quantity > producto.getQuantity()) {
+                allProductsValid = false; // Marcar como inválido si no cumple con las validaciones
+                break; // Salir del bucle si un producto no cumple con las validaciones
             }
         }
-        return new ResponseEntity<String>(shoppingCartService.guardarShoppingCart(shoppingCart),HttpStatus.OK);
+    
+        if (!allProductsValid) {
+            return new ResponseEntity<String>("No se puede crear el carrito porque algunos productos no cumplen con las validaciones.", HttpStatus.BAD_REQUEST);
+        }
+    
+        // Si todos los productos son válidos, ahora realizamos las actualizaciones e inserciones
+        for (Map<String, Integer> item : detalleVenta) {
+            int productId = item.get("productId");
+            int quantity = item.get("quantity");
+    
+            ProductsModel producto = this.productsService.obtenerProductoPorId(productId).orElse(null);
+    
+            int currentQuantity = producto.getQuantity();
+            double pricePerProduct = producto.getPrice();
+    
+            producto.setQuantity(currentQuantity - quantity);
+            productsService.actualizarProductoPorId(producto);
+    
+            double totalPriceProducto = pricePerProduct * quantity;
+    
+            double currentTotalPrice = shoppingCartDTO.getTotalPrice();
+            shoppingCartDTO.setTotalPrice(currentTotalPrice + totalPriceProducto);
+            shoppingCart.setTotalPrice(shoppingCartDTO.getTotalPrice());
+    
+            DetailShoppingCartModel detailShoppingCart = new DetailShoppingCartModel();
+            detailShoppingCart.setShoppingCartId(shoppingCartDTO.getId());
+            detailShoppingCart.setProductId(productId);
+            detailShoppingCart.setQuantity(quantity);
+    
+            detailShoppingCartService.agregarProducto(detailShoppingCart);
+        }
+    
+        return new ResponseEntity<String>(shoppingCartService.guardarShoppingCart(shoppingCart), HttpStatus.OK);
     }
 
     @GetMapping("/listarShoppingCarts")

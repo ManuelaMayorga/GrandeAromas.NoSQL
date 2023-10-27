@@ -1,5 +1,6 @@
 package com.uao.GrandeAromas.Controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uao.GrandeAromas.Exceptions.RecursoNoEncontradoException;
 import com.uao.GrandeAromas.Model.ReviewsModel;
 import com.uao.GrandeAromas.Model.UsuariosModel;
+import com.uao.GrandeAromas.Service.IProductsService;
 import com.uao.GrandeAromas.Service.IReviewsService;
 import com.uao.GrandeAromas.Service.IUsuarioService;
+import com.uao.GrandeAromas.Model.ProductsModel;
 
 @RestController
 @RequestMapping("/GrandeAromas/reviews")
@@ -31,10 +34,19 @@ public class ReviewsController {
     @Autowired
     IUsuarioService usuarioService;
 
+    @Autowired
+    IProductsService productService;
+
     @PostMapping("/crearReview")
     public ResponseEntity<String> guardarReview(@RequestBody ReviewsModel review) {
         UsuariosModel usuario = usuarioService.encontrarIdyUsuarioNombre(review.getUserId());
+        Date fechaActual = new Date();
+        review.setDate(fechaActual);
         review.setNameUser(usuario.getNameUser());
+        Optional<ProductsModel> productId = this.productService.obtenerProductoPorId(review.getProduct_id());
+        if (!productId.isPresent()) {
+            return new ResponseEntity<String>("El producto que intentas calificar no existe", HttpStatus.NOT_FOUND);
+        }
         reviewsService.guardarReview(review);
         return new ResponseEntity<String>(reviewsService.guardarReview(review), HttpStatus.OK);
     }
