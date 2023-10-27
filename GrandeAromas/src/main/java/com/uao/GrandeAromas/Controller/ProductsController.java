@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uao.GrandeAromas.Domain.Consulta3DTO;
 import com.uao.GrandeAromas.Enums.CategoryEnum;
 import com.uao.GrandeAromas.Enums.UnitEnum;
 import com.uao.GrandeAromas.Exceptions.RecursoNoEncontradoException;
@@ -88,4 +89,15 @@ public class ProductsController {
         }
         return new ResponseEntity<>(product.get(), HttpStatus.OK);
     }
+
+    @GetMapping("/stock")
+    public ResponseEntity<List<Consulta3DTO>> getProductStock() {
+        List<Consulta3DTO> productStockList = productsService.getProductsStock();
+
+        if (!productStockList.isEmpty()) {
+            return new ResponseEntity<>(productStockList, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }    
 }

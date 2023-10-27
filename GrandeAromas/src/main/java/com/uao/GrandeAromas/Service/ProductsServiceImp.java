@@ -1,6 +1,8 @@
 package com.uao.GrandeAromas.Service;
 
 import org.springframework.stereotype.Service;
+
+import com.uao.GrandeAromas.Domain.Consulta3DTO;
 import com.uao.GrandeAromas.Model.ProductsModel;
 import com.uao.GrandeAromas.Repository.IProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +43,9 @@ public class ProductsServiceImp implements IProductsService {
         productsRepository.deleteById(productId);
         return "El producto con el id: " + productId + " fue eliminado exitosamente";
     }
-    
+
+    @Override
+    public List<Consulta3DTO> getProductsStock() {
+        return productsRepository.getProductsStock();
+    }
 }

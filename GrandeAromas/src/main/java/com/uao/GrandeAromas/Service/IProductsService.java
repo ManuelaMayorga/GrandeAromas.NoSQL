@@ -1,5 +1,6 @@
 package com.uao.GrandeAromas.Service;
 
+import com.uao.GrandeAromas.Domain.Consulta3DTO;
 import com.uao.GrandeAromas.Model.ProductsModel;
 
 
@@ -16,4 +17,6 @@ public interface IProductsService {
     Optional<ProductsModel> obtenerProductoPorId(int productId);
 
     String eliminarProductoPorId(int productId);
+
+    List<Consulta3DTO> getProductsStock();
 }
