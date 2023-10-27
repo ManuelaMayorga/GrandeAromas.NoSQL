@@ -55,11 +55,5 @@ public class DetailShoppingCartServiceImp implements IDetailShoppingCartService 
         return detailShoppingCartRepository.findAll();
     }
 
-    @Override
-    public List<DetailShoppingCartModel> obtenerDetallesPorCarrito(int shoppingCartId) {
-        // Agrega la lógica para obtener detalles de carrito específicos por ID de carrito aquí.
-        // Utiliza detailShoppingCartRepository u otras dependiendo de tu flujo de trabajo.
-        return detailShoppingCartRepository.findByShoppingCartId(shoppingCartId);
-    }
 }
 

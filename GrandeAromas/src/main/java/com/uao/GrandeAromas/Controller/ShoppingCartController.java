@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;
@@ -113,5 +115,16 @@ public class ShoppingCartController {
         return new ResponseEntity<List<ShoppingCartModel>>(shoppingCartService.obtenerShoppingCarts(),HttpStatus.OK);
     }
     
+    @DeleteMapping("/eliminarShoppingCart/{shoppingCartId}")
+    public ResponseEntity<String> eliminarShoppingCartPorId(@PathVariable int shoppingCartId) {
+        Optional<ShoppingCartModel> optionalShoppingCart = shoppingCartService.obtenerShoppingCartPorId(shoppingCartId);
+
+        if (!optionalShoppingCart.isPresent()) {
+            return new ResponseEntity<String>("El carrito de compras con id " + shoppingCartId + " no existe.", HttpStatus.NOT_FOUND);
+        }
+
+        shoppingCartService.eliminarShoppingCartPorId(shoppingCartId);
+        return new ResponseEntity<String>("El carrito de compras con id " + shoppingCartId + " fue eliminado correctamente", HttpStatus.OK);
+    }
 
 }

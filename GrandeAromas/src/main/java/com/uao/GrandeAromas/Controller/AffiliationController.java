@@ -1,8 +1,10 @@
 package com.uao.GrandeAromas.Controller;
 
 import com.uao.GrandeAromas.Model.AffiliationModel;
+import com.uao.GrandeAromas.Model.MembershipModel;
 import com.uao.GrandeAromas.Model.UsuariosModel;
 import com.uao.GrandeAromas.Service.IAffiliationService;
+import com.uao.GrandeAromas.Service.IMembershipService;
 import com.uao.GrandeAromas.Service.IUsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class AffiliationController {
     IAffiliationService affiliationService;
 
     @Autowired
+    IMembershipService membershipService;
+
+    @Autowired
     IUsuarioService usuarioService;
 
     @PostMapping("/guardarAffiliation")
@@ -30,14 +35,21 @@ public class AffiliationController {
         Date fechaActual = new Date();
         affiliation.setStart_date(fechaActual);
 
+        Optional<UsuariosModel> userId = this.usuarioService.obtenerUsuariosPorId(affiliation.getUserId());
+        if(!userId.isPresent()){
+            return new ResponseEntity<String>("El usuario que intentas afiliar no existe", HttpStatus.NOT_FOUND);
+        }
+        Optional<MembershipModel> membershipId = this.membershipService.obtenerMembershipPorId(affiliation.getMembershipId());
+        if(!membershipId.isPresent()){
+            return new ResponseEntity<String>("La membresía que intentas afiliar no existe", HttpStatus.NOT_FOUND);
+        }
         // Calcular la fecha de fin, 1 mes después
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaActual);
         calendar.add(Calendar.MONTH, 1);
         Date fechaFinal = calendar.getTime();
-
         affiliation.setFinish_date(fechaFinal);
-    
+ 
         UsuariosModel usuario = usuarioService.encontrarIdyEmail(affiliation.getUserId());
         affiliation.setEmail(usuario.getEmail());
         affiliationService.guardarAffiliation(affiliation);

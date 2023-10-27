@@ -14,5 +14,7 @@ public interface IShoppingCartService {
     Optional<ShoppingCartModel> obtenerShoppingCartPorId (int id);
 
     String actualizarShoppingCartPorId(ShoppingCartModel shoppingCart);
+
+    String eliminarShoppingCartPorId(int id);
     
 }

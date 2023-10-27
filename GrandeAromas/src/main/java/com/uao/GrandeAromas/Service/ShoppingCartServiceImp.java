@@ -38,5 +38,11 @@ public class ShoppingCartServiceImp implements IShoppingCartService{
         return "El carrito de compras con id se actualizo correctamente";
     }
 
+    @Override
+    public String eliminarShoppingCartPorId(int id) {
+        shoppingCartRepository.deleteById(id);
+        return "El carrito de compras con id " + id + " fue eliminado correctamente";
+    }
+
     
 }
