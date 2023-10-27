@@ -1,6 +1,6 @@
 package com.uao.GrandeAromas.Model;
 
-import java.sql.Date;
+import java.util.Date;
 
 
 import org.springframework.data.annotation.Id;

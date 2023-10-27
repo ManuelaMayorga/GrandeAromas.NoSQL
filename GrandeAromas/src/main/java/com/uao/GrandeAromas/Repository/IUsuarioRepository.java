@@ -7,5 +7,9 @@ import org.springframework.data.mongodb.repository.Query;
 public interface IUsuarioRepository extends MongoRepository<UsuariosModel, Integer> {
     @Query(value = "{'id': ?0}",fields = "{'_id':1,'nameUser':1}")
     UsuariosModel encontrarIdyUsuarioNombre(int userId);
+
+    @Query(value = "{'id': ?0}",fields = "{'_id':1,'email':1}")
+    UsuariosModel encontrarIdyEmail(int userId);
+
     
 }

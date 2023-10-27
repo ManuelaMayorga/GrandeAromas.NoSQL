@@ -14,6 +14,15 @@ public class UsuarioServiceImp implements IUsuarioService {
     IUsuarioRepository usuarioRepository;
 
     @Override
+    public UsuariosModel encontrarIdyEmail(int userId) {
+        UsuariosModel emailEncontrado = new UsuariosModel();
+        UsuariosModel emailBD = usuarioRepository.encontrarIdyEmail(userId);
+        emailEncontrado.setId(emailBD.getId());
+        emailEncontrado.setEmail(emailBD.getEmail());
+        return emailEncontrado;
+    }
+    
+    @Override
     public String guardarUsuario(UsuariosModel usuario) {
         usuarioRepository.save(usuario);
         return "Usuario guardado";
@@ -39,15 +48,6 @@ public class UsuarioServiceImp implements IUsuarioService {
         usuarioEncontrado.setNameUser(usuarioBD.getNameUser());
         return usuarioEncontrado;
         }
-    @Override
-    public UsuariosModel encontrarIdyEmail(int userId);{
-        UsuariosModel emailEncontrado= new UsuariosModel();
-        UsuariosModel emailBD=usuarioRepository.encontrarIdyEmail(userId);
-        emailEncontrado.setId(emailBD.getId());
-        emailEncontrado.setNameUser(emailBD.getEmail());
-        return emailEncontrado;
-        }
-    
 
     @Override
     public Optional<UsuariosModel> obtenerUsuariosPorId(int userId) {

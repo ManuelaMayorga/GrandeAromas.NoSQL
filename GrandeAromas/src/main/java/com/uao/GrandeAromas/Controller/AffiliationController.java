@@ -10,8 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -39,9 +38,8 @@ public class AffiliationController {
 
         affiliation.setFinish_date(fechaFinal);
     
-        Optional<UsuariosModel> usuario = usuarioService.obtenerUsuariosPorId(affiliation.getUserId());
+        UsuariosModel usuario = usuarioService.encontrarIdyEmail(affiliation.getUserId());
         affiliation.setEmail(usuario.getEmail());
-
         affiliationService.guardarAffiliation(affiliation);
         return new ResponseEntity<>("Affiliation guardada", HttpStatus.OK);
     }
