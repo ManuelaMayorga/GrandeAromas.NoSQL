@@ -1,0 +1,623 @@
+//Colecciones e Inserts para la base de datos ‘GrandeAromas1’ en MongoDB
+En este orden crear las colecciones.
+//Coleccion User
+use('GrandeAromas1');
+db.createCollection('User', {
+    validator: {
+      $jsonSchema: {
+        bsonType: 'object',
+        title: 'User',
+        required: ['nameUser', 'email', 'password','rol'],
+        properties: {
+          nameUser: { bsonType: 'string' },
+          email: { bsonType: 'string' },
+          password: {bsonType: 'string'},
+          rol: { 
+        bsonType: 'string',
+        enum: ['Admin','Client']
+          },
+        }
+      }
+    }
+  })
+
+//Insert para la colección de User
+db.User.insertMany([
+  {
+    id: 1,
+    nameUser: 'Usuario1',
+    email: 'usuario1@admin.com',
+    password: 'contraseña1',
+    rol: 'Admin'
+  },
+  {
+    id: 2,
+    nameUser: 'Usuario2',
+    email: 'usuario2@example.com',
+    password: 'contraseña2',
+    rol: 'Client'
+  },
+  {
+    id: 3,
+    nameUser: 'Usuario3',
+    email: 'usuario3@example.com',
+    password: 'contraseña3',
+    rol: 'Client'
+  },
+  {
+    id: 4,
+    nameUser: 'Usuario4',
+    email: 'usuario4@example.com',
+    password: 'contraseña4',
+    rol: 'Client'
+  },
+  {
+    id: 5,
+    nameUser: 'Usuario5',
+    email: 'usuario5@example.com',
+    password: 'contraseña5',
+    rol: 'Client'
+  },
+  {
+    id: 6,
+    nameUser: 'Usuario6',
+    email: 'usuario6@example.com',
+    password: 'contraseña6',
+    rol: 'Client'
+  },
+  {
+    id: 7,
+    nameUser: 'Usuario7',
+    email: 'usuario7@example.com',
+    password: 'contraseña7',
+    rol: 'Client'
+  },
+  {
+    id: 8,
+    nameUser: 'Usuario8',
+    email: 'usuario8@example.com',
+    password: 'contraseña8',
+    rol: 'Client'
+  },
+  {
+    id: 9,
+    nameUser: 'Usuario9',
+    email: 'usuario9@example.com',
+    password: 'contraseña9',
+    rol: 'Client'
+  },
+  {
+    id: 10,
+    nameUser: 'Usuario10',
+    email: 'usuario10@example.com',
+    password: 'contraseña10',
+    rol: 'Client'
+  }
+])
+
+
+
+
+
+//Colección Membership
+use('GrandeAromas1');
+db.createCollection('Membership', {
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      title: 'Membership',
+      required: ['nombre', 'description', 'cost'],
+      properties: {
+        nombre: { bsonType: 'string' },
+        description: { bsonType: 'string' },
+        cost: { bsonType: 'double' }
+      }
+    }
+  }
+})
+
+//Inserts de Membership
+db.Membership.insertMany([
+  {
+    id: 1,
+    nombre: 'Miembro Gold',
+    description: 'Afiliación Gold con beneficios especiales',
+    cost: 99.99
+  },
+  {
+    id: 2,
+    nombre: 'Miembro Silver',
+    description: 'Afiliación Silver con descuentos exclusivos',
+    cost: 49.99
+  },
+  {
+    id: 3,
+    nombre: 'Miembro Gold',
+    description: 'Afiliación Gold con beneficios especiales',
+    cost: 99.99
+  },
+  {
+    id: 4,
+    nombre: 'Miembro Silver',
+    description: 'Afiliación Silver con descuentos exclusivos',
+    cost: 49.99
+  },
+  {
+    id: 5,
+    nombre: 'Miembro Gold',
+    description: 'Afiliación Gold con beneficios especiales',
+    cost: 99.99
+  },
+  {
+    id: 6,
+    nombre: 'Miembro Silver',
+    description: 'Afiliación Silver con descuentos exclusivos',
+    cost: 49.99
+  },
+  {
+    id: 7,
+    nombre: 'Miembro Gold',
+    description: 'Afiliación Gold con beneficios especiales',
+    cost: 99.99
+  }
+])
+
+
+//Colección Affiliation
+use('GrandeAromas1');
+db.createCollection('Affiliation', {
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      title: 'Affiliation',
+      required: ['userId', 'membershipId', 'email', 'start_date', 'finish_date', 'state'],
+      properties: {
+        userId: { bsonType: 'int' },
+        membershipId : { bsonType: 'int' },
+        email: { bsonType: 'string' },
+        start_date: { bsonType: 'date' },
+        finish_date: { bsonType: 'date' },
+        state: {
+          bsonType: 'string',
+          enum: ['activa', 'inactiva']
+        }
+      }
+    }
+  }
+})
+
+//Inserts colección Affiliation
+db.Affiliation.insertMany([
+  {
+    id: 1,
+    userId: 1,
+    membershipId: 1,
+    state: 'activa'
+  },
+  {
+    id: 2,
+    userId: 2,
+    membershipId: 2,
+    state: 'inactiva'
+  },
+  {
+    id: 3,
+    userId: 3,
+    membershipId: 3,
+    state: 'activa'
+  },
+  {
+    id: 4,
+    userId: 4,
+    membershipId: 4,
+    state: 'inactiva'
+  },
+  {
+    id: 5,
+    userId: 5,
+    membershipId: 5,
+    state: 'activa'
+  },
+  {
+    id: 6,
+    userId: 7,
+    membershipId: 6,
+    state: 'inactiva'
+  },
+  {
+    id: 7,
+    userId: 9,
+    membershipId: 7,
+    state: 'activa'
+  }
+])
+
+//Coleccion Products
+use('GrandeAromas1');
+db.createCollection('Products', {
+    validator: {
+      $jsonSchema: {
+        bsonType: 'object',
+        title: 'product',
+        required: ['productName', 'category', 'description', 'quantity', 'unit', 'price'],
+        properties: {
+          productName: { bsonType: 'string' },
+          category: {
+            bsonType: 'string',
+            enum: ['al_detal', 'al_por_mayor', 'maquinas']
+          },
+          description: { bsonType: 'string' },
+          quantity: { bsonType: 'int' },
+          unit: {
+            bsonType: 'string',
+            enum: ['Gr', 'Kg', 'Unds']
+          },
+          price: { bsonType: 'double' },
+        }
+      }
+    }
+  })
+
+//Inserts de la colección Products
+db.Products.insertMany([
+  {
+    id: 1,
+    productName: 'Café en Grano',
+    category: 'al_detal',
+    description: 'Café en grano de alta calidad',
+    quantity: 20,
+    unit: 'Kg',
+    price: 40.86
+  },
+  {
+    id: 2,
+    productName: 'Café Molido',
+    category: 'al_por_mayor',
+    description: 'Café molido recién tostado',
+    quantity: 15,
+    unit: 'Kg',
+    price: 35.78
+  },
+  {
+    id: 3,
+    productName: 'Café Instantáneo',
+    category: 'al_detal',
+    description: 'Café instantáneo solubre',
+    quantity: 25,
+    unit: 'Kg',
+    price: 30.78
+  },
+  {
+    id: 4,
+    productName: 'Máquina de Espresso',
+    category: 'maquinas',
+    description: 'Máquina profesional para preparar espresso',
+    quantity: 10,
+    unit: 'Unds',
+    price: 1200.67
+  },
+  {
+    id: 5,
+    productName: 'Máquina de Goteo',
+    category: 'maquinas',
+    description: 'Cafetera de goteo programable',
+    quantity: 8,
+    unit: 'Unds',
+    price: 150.23
+  },
+  {
+    id: 6,
+    productName: 'Molinillo de Café',
+    category: 'maquinas',
+    description: 'Molinillo eléctrico para café',
+    quantity: 12,
+    unit: 'Unds',
+    price: 75.65
+  },
+  {
+    id: 7,
+    productName: 'Café Descafeinado',
+    category: 'al_por_mayor',
+    description: 'Café descafeinado en grano',
+    quantity: 18,
+    unit: 'Kg',
+    price: 45.86
+  },
+  {
+    id: 8,
+    productName: 'Café en Cápsulas',
+    category: 'al_por_mayor',
+    description: 'Café en cápsulas compatibles',
+    quantity: 30,
+    unit: 'Kg',
+    price: 50.12
+  },
+  {
+    id: 9,
+    productName: 'Máquina de Café Automática',
+    category: 'maquinas',
+    description: 'Máquina automática con molinillo',
+    quantity: 7,
+    unit: 'Unds',
+    price: 900.76
+  },
+  {
+    id: 10,
+    productName: 'Café Orgánico',
+    category: 'al_por_mayor',
+    description: 'Café orgánico certificado',
+    quantity: 22,
+    unit: 'Kg',
+    price: 42.45
+  },
+  {
+    id: 11,
+    productName: 'Máquina de Prensa Francesa',
+    category: 'maquinas',
+    description: 'Prensa francesa de acero inoxidable',
+    quantity: 9,
+    unit: 'Unds',
+    price: 35.83
+  }
+])
+
+
+//Colección Reviews
+use('GrandeAromas1');
+db.createCollection('Reviews', {
+    validator: {
+      $jsonSchema: {
+        bsonType: 'object',
+        title: 'Reviews',
+        required: ['userId', 'nameUser','product_id', 'comment', 'calification', 'date'],
+        properties: {
+            userId: { bsonType: 'int' },
+            nameUser: { bsonType: 'string' },
+            product_id: { bsonType: 'int' },
+            comment: { bsonType: 'string' },
+            calification: {
+                bsonType: 'int',
+                minimum: 1,
+                maximum: 5,
+            },
+            date: { bsonType: 'date' }
+        }
+      }
+    }
+  })
+//Inserts de la coleccion Reviews
+db.Reviews.insertMany([
+  {
+    id: 1,
+    userId: 2,
+    product_id: 1,
+    comment: "El mejor producto",
+    calification: 5
+  },
+  {
+    id: 2,
+    userId: 2,
+    product_id: 2,
+    comment: "Ideal para mi cafetería",
+    calification: 4
+  },
+  {
+    id: 3,
+    userId: 1,
+    product_id: 1,
+    comment: "Muy satisfecho con este producto",
+    calification: 5
+  },
+  {
+    id: 4,
+    userId: 3,
+    product_id: 2,
+    comment: "No cumplió mis expectativas",
+    calification: 2
+  },
+  {
+    id: 5,
+    userId: 4,
+    product_id: 1,
+    comment: "Buen producto a un precio razonable",
+    calification: 4
+  }
+])
+
+
+
+
+
+
+
+//Coleccion Shopping Cart
+use('GrandeAromas1');
+db.createCollection('ShoppingCart', {
+    validator: {
+      $jsonSchema: {
+        bsonType: 'object',
+        title: 'ShoppingCart',
+        required: ['userId', 'addressInfo', 'date', 'totalPrice', 'orderStatus'],
+        properties: {
+          userId: { bsonType: 'int' },
+          addressInfo: {
+            bsonType: 'array',
+            items: {
+              bsonType: 'object',
+              title: 'addressInfo',
+              required: ['address', 'neighborhood', 'city', 'country', 'department', 'zipCoder', 'contactTel'],
+              properties: {
+                address: { bsonType: 'string' },
+                neighborhood: { bsonType: 'string' },
+                city: { bsonType: 'string' },
+                country: { bsonType: 'string' },
+                department: { bsonType: 'string' },
+                zipCoder: { bsonType: 'int' },
+                contactTel: { bsonType: 'string' }
+              }
+            }
+          },
+          date: { bsonType: 'date' },
+          totalPrice: { bsonType: 'double' },
+          orderStatus: {
+            bsonType: 'string',
+            enum: ['Pagada', 'Entregado', 'En_Proceso']
+          }
+        }
+      }
+    }
+  })
+
+//Insert para la coleccion deShoppingCart
+db.ShoppingCart.insertMany([
+  {
+    id: 1,
+    userId: 1,
+    addressInfo: [
+      {
+        address: '456 Oak Ave',
+        neighborhood: 'Suburbia',
+        city: 'California',
+        country: 'Estados Unidos',
+        department: 'Los Angeles',
+        zipCoder: 54321,
+        contactTel: "555-987-6543"
+      }
+    ],
+    detalleVenta: [
+      {
+        productId: 3,
+        quantity: 2
+      },
+      {
+        productId: 4,
+        quantity: 1
+      },
+      {
+        productId: 5,
+        quantity: 6
+      }
+    ]
+  },
+  {
+    id: 2,
+    userId: 3,
+    addressInfo: [
+      {
+        address: '789 Pine Ln',
+        neighborhood: 'Rural Area',
+        city: 'Sampleville',
+        country: 'China',
+        department: 'Pasto',
+        zipCoder: 67890,
+        contactTel: '555-789-1234'
+      }
+    ],
+    detalleVenta: [
+      {
+        productId: 1,
+        quantity: 3
+      },
+      {
+        productId: 2,
+        quantity: 2
+      }
+    ]
+  },
+  {
+    id: 3,
+    userId: 2,
+    addressInfo: [
+      {
+        address: '123 Main St',
+        neighborhood: 'Downtown',
+        city: 'Cali',
+        country: 'Colombia',
+        department: 'Valle del Cauca',
+        zipCoder: 12345,
+        contactTel: "555-123-4567"
+      }
+    ],
+    detalleVenta: [
+      {
+        productId: 1,
+        quantity: 1
+      },
+      {
+        productId: 3,
+        quantity: 1
+      }
+    ]
+  },
+  {
+    id: 4,
+    userId: 4,
+    addressInfo: [
+      {
+        address: '123 Main St',
+        neighborhood: 'Downtown',
+        city: 'Tokio',
+        country: 'Japon',
+        department: 'Kanto',
+        zipCoder: 12345,
+        contactTel: "555-123-4567"
+      }
+    ],
+    detalleVenta: [
+      {
+        productId: 2,
+        quantity: 1
+      },
+      {
+        productId: 4,
+        quantity: 2
+      }
+    ]
+  },
+  {
+    id: 5,
+    userId: 5,
+    addressInfo: [
+      {
+        address: '123 Main St',
+        neighborhood: 'Downtown',
+        city: 'Pereira',
+        country: 'Colombia',
+        department: 'Armenia',
+        zipCoder: 12345,
+        contactTel: "555-123-4567"
+      }
+    ],
+    detalleVenta: [
+      {
+        productId: 3,
+        quantity: 2
+      },
+      {
+        productId: 4,
+        quantity: 1
+      }
+    ]
+  }
+])
+
+
+//Coleccion DetailShoppingCart
+use('GrandeAromas1');
+db.createCollection('DetailShoppingCart', {
+  validator: {
+    $jsonSchema: {
+      bsonType: 'object',
+      title: 'DetailShoppingCart',
+      required: ['shoppingCartId', 'productId', 'quantity'],
+      properties: {
+        shoppingCartId: { bsonType: 'int' },
+        productId: { bsonType: 'int' },
+        quantity: { bsonType: 'int' }
+      }
+    }
+  }
+})
+//Inserts de DetailShoppingCart
+//DetailShoppingCart solo se "lista"
+

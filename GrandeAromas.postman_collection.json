@@ -1,0 +1,981 @@
+{
+	"info": {
+		"_postman_id": "b92e661f-14c4-4d51-90c2-876e8f2d43e7",
+		"name": "GrandeAromas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26167901"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "guardarUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nameUser\": \"Usuario1\",\r\n    \"email\": \"usuario1@user.com\",\r\n    \"password\": \"contraseña1\",\r\n    \"rol\": \"Client\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/usuarios/guardarUsuario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"usuarios",
+								"guardarUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerUsuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/usuarios/obtenerUsuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"usuarios",
+								"obtenerUsuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarUsuario1PorId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/usuarios/eliminar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"usuarios",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerUsuario1PorIdEliminado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/usuarios/obtenerUsuario/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"usuarios",
+								"obtenerUsuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizarUsuario2PorId",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameUser\":\"Usuario2Actualizado\",\r\n    \"email\":\"usuario2actualizado@user.com\",\r\n    \"password\": \"contraseña2actualizada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/usuarios/actualizar/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"usuarios",
+								"actualizar",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerUsuario2PorIdActualizado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/usuarios/obtenerUsuario/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"usuarios",
+								"obtenerUsuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Casos de prueba creados para la colección User cons las funcionalidades."
+		},
+		{
+			"name": "Membership",
+			"item": [
+				{
+					"name": "guardarMembership",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":2,\r\n    \"nombre\":\"Miembro Silver\",\r\n    \"description\": \"Afilicacion Silver con beneficios especiales\",\r\n    \"cost\": 49.99\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/memberships/guardarMembership",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"memberships",
+								"guardarMembership"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerMemberships",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/memberships/obtenerMemberships",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"memberships",
+								"obtenerMemberships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarMembershipPorId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/memberships/eliminar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"memberships",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerMembershipEliminadaPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/memberships/obtenerMembership/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"memberships",
+								"obtenerMembership",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizarMembershipPorId",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Miembro Gold\",\r\n    \"description\": \"Afiliación Gold con beneficios especiales\",\r\n    \"cost\": 99.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/memberships/actualizar/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"memberships",
+								"actualizar",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerMemberships (con la Actualizada)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/memberships/obtenerMemberships",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"memberships",
+								"obtenerMemberships"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Affiliation",
+			"item": [
+				{
+					"name": "guardarAfiliattion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"userId\": 3,\r\n    \"membershipId\": 2,\r\n    \"state\": \"activa\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/affiliations/guardarAffiliation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"affiliations",
+								"guardarAffiliation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "guardarAffiliation con User no existente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"userId\": 1,\r\n    \"membershipId\": 2,\r\n    \"state\": \"activa\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/affiliations/guardarAffiliation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"affiliations",
+								"guardarAffiliation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "guardarAffiliation con Membership no existente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"userId\": 2,\r\n    \"membershipId\": 1,\r\n    \"state\": \"activa\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/affiliations/guardarAffiliation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"affiliations",
+								"guardarAffiliation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerAffiliations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/affiliations/obtenerAffiliations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"affiliations",
+								"obtenerAffiliations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminarAffiliation2 por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/affiliations/eliminar/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"affiliations",
+								"eliminar",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerAffiliation2Eliminada Por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/affiliations/obtenerAffiliation/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"affiliations",
+								"obtenerAffiliation",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizarAffiliationPorId1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"userId\": 2,\r\n    \"membershipId\": 2,\r\n    \"email\": \"usuario2actualizado@user.com\"\r\n  }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/affiliations/actualizar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"affiliations",
+								"actualizar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtenerAffiliation actualizada por el Id 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/affiliations/obtenerAffiliations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"affiliations",
+								"obtenerAffiliations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "guardarProducto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 1,\r\n        \"productName\": \"Café en Grano\",\r\n        \"category\": \"al_detal\",\r\n        \"description\": \"Café en grano de alta calidad\",\r\n        \"quantity\": 20,\r\n        \"unit\": \"Kg\",\r\n        \"price\": 40.86\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/products/agregarProducto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"products",
+								"agregarProducto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtener products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/products/obtenerProductos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"products",
+								"obtenerProductos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarproductoporId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/products/eliminarProducto/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"products",
+								"eliminarProducto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar producto eliminado por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/products/buscarProducto/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"products",
+								"buscarProducto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar producto 2 por Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\": \"al_por_mayor\",\r\n    \"description\": \"cafe super nice\",\r\n    \"quantity\": 200,\r\n    \"unit\": \"Gr\",\r\n    \"price\": 50.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/products/actualizarProducto/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"products",
+								"actualizarProducto",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar producto actualizado por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/products/buscarProducto/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"products",
+								"buscarProducto",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "CrearReviews",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": 1,\r\n        \"userId\": 2,\r\n        \"product_id\": 3,\r\n        \"comment\": \"El mejor producto\",\r\n        \"calification\": 4\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/reviews/crearReview",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"reviews",
+								"crearReview"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listarReviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/reviews/listarReviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"reviews",
+								"listarReviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Review de Id:1",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/reviews/eliminar/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"reviews",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Review eliminada",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/reviews/buscarReview/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"reviews",
+								"buscarReview",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarReviewporId:2",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"Producto super rico\",\r\n    \"calification\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/reviews/actualizarReview/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"reviews",
+								"actualizarReview",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuscarReview Actualizada",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/reviews/buscarReview/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"reviews",
+								"buscarReview",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ShoppingCart",
+			"item": [
+				{
+					"name": "guardarShoppingCart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"userId\": 2,\r\n    \"addressInfo\": [\r\n      {\r\n        \"address\": \"456 Avenue\",\r\n        \"neighborhood\": \"Morales\",\r\n        \"city\": \"Cali\",\r\n        \"country\": \"Colombia\",\r\n        \"department\": \"Valle del Cauca\",\r\n        \"zipCoder\": 12345,\r\n        \"contactTel\": \"555-123-4568\"\r\n      }\r\n    ],\r\n    \"detalleVenta\": [\r\n      {\r\n        \"productId\": 3,\r\n        \"quantity\": 1\r\n      },\r\n      {\r\n        \"productId\": 4,\r\n        \"quantity\": 1\r\n      }\r\n    ]\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/shoppingCart/guardarShoppingCart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"shoppingCart",
+								"guardarShoppingCart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListarShoppingCart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/shoppingCart/listarShoppingCarts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"shoppingCart",
+								"listarShoppingCarts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EliminarShoppingCartporId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/shoppingCart/eliminarShoppingCart/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"shoppingCart",
+								"eliminarShoppingCart",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar ShoppingCart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/shoppingCart/listarShoppingCarts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"shoppingCart",
+								"listarShoppingCarts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DetailShoppingCart",
+			"item": [
+				{
+					"name": "Listar Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/detailShoppingCart/listarDetailShoppingCarts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"detailShoppingCart",
+								"listarDetailShoppingCarts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar detalle de compra",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/GrandeAromas/detailShoppingCart/eliminarDetallePorShoppingCartId/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"GrandeAromas",
+								"detailShoppingCart",
+								"eliminarDetallePorShoppingCartId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
