@@ -44,5 +44,14 @@ public class DetailShoppingCartServiceImp implements IDetailShoppingCartService 
         return detalles;
     }
 
+    @Override
+    public String eliminarDetallePorShoppingCartId(int shoppingCartId) {
+        // Implementa la lógica para eliminar todos los detalles de carrito de compras
+        // por shoppingCartId.
+        // Puedes utilizar detailShoppingCartRepository para realizar la consulta.
+        detailShoppingCartRepository.deleteByShoppingCartId(shoppingCartId);
+        return "El detalle fue eliminado exitosamente";
+    }
+
 }
 

@@ -1,5 +1,6 @@
 package com.uao.GrandeAromas.Controller;
 
+import com.uao.GrandeAromas.Exceptions.RecursoNoEncontradoException;
 import com.uao.GrandeAromas.Model.AffiliationModel;
 import com.uao.GrandeAromas.Model.MembershipModel;
 import com.uao.GrandeAromas.Model.UsuariosModel;
@@ -68,30 +69,25 @@ public class AffiliationController {
         return new ResponseEntity<>("Affiliation con ID " + affiliationId + " eliminada", HttpStatus.OK);
     }
 
-    @PutMapping("/actualizar/{affiliationId}")
-    public ResponseEntity<String> actualizarAffiliationPorId(@PathVariable int affiliationId,
-            @RequestBody AffiliationModel affiliation) {
-        Optional<AffiliationModel> optionalAffiliation = affiliationService.obtenerAffiliationPorId(affiliationId);
+   @PutMapping("/actualizar/{affiliationId}")
+    public ResponseEntity<String> actualizarAffiliationPorId(@PathVariable int affiliationId, @RequestBody AffiliationModel affiliationDetail) {
+    AffiliationModel affiliation = affiliationService.obtenerAffiliationPorId(affiliationId).orElseThrow(() -> new RecursoNoEncontradoException("Afiliacion no encontrada con el id: " + affiliationId));
 
-        if (!optionalAffiliation.isPresent()) {
-            return new ResponseEntity<>("Affiliation no encontrada", HttpStatus.NOT_FOUND);
-        }
+        affiliation.setUserId(affiliationDetail.getUserId());
+        affiliation.setMembershipId(affiliationDetail.getMembershipId());
+        affiliation.setEmail(affiliationDetail.getEmail());
+        // AffiliationModel existingAffiliation = optionalAffiliation.get();
 
-        AffiliationModel existingAffiliation = optionalAffiliation.get();
+        if (affiliationDetail.getUserId() != 0 && affiliationDetail.getMembershipId() != 0 && !affiliationDetail.getEmail().isEmpty()) {
+            return new ResponseEntity<>("Affiliation con ID " + affiliationId + " actualizada", HttpStatus.OK);
+        } 
+        else {
+            return new ResponseEntity<>("No se ha actualizado la Affiliation con ID " + affiliationId + ", faltan campos por llenar o son invalidos", HttpStatus.BAD_REQUEST);
+        }
+        // // Continúa con los demás campos de actualización
 
-        if (affiliation.getUserId() > 0) {
-            existingAffiliation.setUserId(affiliation.getUserId());
-        }
-        if (affiliation.getMembershipId() > 0) {
-            existingAffiliation.setMembershipId(affiliation.getMembershipId());
-        }
-        if (affiliation.getEmail() != null) {
-            existingAffiliation.setEmail(affiliation.getEmail());
-        }
-        // Continúa con los demás campos de actualización
-
-        affiliationService.actualizarAfiliacionPorId(affiliationId);
-        return new ResponseEntity<>("Affiliation con ID " + affiliationId + " actualizada", HttpStatus.OK);
+        // affiliationService.actualizarAfiliacionPorId(affiliationId);
+        // return new ResponseEntity<>("Affiliation con ID " + affiliationId + " actualizada", HttpStatus.OK);
     }
 
     @GetMapping("/obtenerAffiliation/{affiliationId}")

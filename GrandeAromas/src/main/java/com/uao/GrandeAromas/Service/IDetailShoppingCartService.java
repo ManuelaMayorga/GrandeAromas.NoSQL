@@ -13,4 +13,6 @@ public interface IDetailShoppingCartService {
 
     List<DetailShoppingCartModel> obtenerDetallesPorCarrito(int carritoId);
 
+    String eliminarDetallePorShoppingCartId(int shoppingCartId);
+
 }

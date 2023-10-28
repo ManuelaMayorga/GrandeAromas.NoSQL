@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface IDetailShoppingCartRepository extends MongoRepository<DetailShoppingCartModel, Integer> {
     List<DetailShoppingCartModel> findByShoppingCartId(int shoppingCartId);
+
+    String deleteByShoppingCartId(int shoppingCartId);
 }
 

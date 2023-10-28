@@ -4,7 +4,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +42,11 @@ public class DetailShoppingCartController {
     @GetMapping("/listarDetailShoppingCarts")
     public ResponseEntity<List<DetailShoppingCartModel>> listarDetailShoppingCarts() {
         return new ResponseEntity<List<DetailShoppingCartModel>>(detailShoppingCartService.obtenerDetailShoppingCarts(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminarDetallePorShoppingCartId/{shoppingCartId}")
+    public ResponseEntity<String> eliminarDetallePorShoppingCartId(@PathVariable int shoppingCartId) {
+        return new ResponseEntity<String>(detailShoppingCartService.eliminarDetallePorShoppingCartId(shoppingCartId), HttpStatus.OK);
     }
 
 }
